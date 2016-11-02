@@ -25,57 +25,25 @@ AREAS = ["tor"]
 # name.  If no match, the neighborhood field, which is a string, will be checked to see if it matches
 # anything in NEIGHBORHOODS.
 BOXES = {
-    "adams_point": [
-        [37.80789, -122.25000],
-        [37.81589,	-122.26081],
+    "trinity_bellwoods": [
+        [-79.435827,43.634757],
+        [-79.40598,43.660513],
     ],
-    "piedmont": [
-        [37.82240, -122.24768],
-        [37.83237, -122.25386],
+    "harbourfront": [
+        [-79.405271, 43.636533],
+        [-79.366556, 43.648935],
     ],
-    "rockridge": [
-        [37.83826, -122.24073],
-        [37.84680, -122.25944],
+    "annex-dupont": [
+        [-79.42374,43.664476],
+        [-79.397247,43.683153],
     ],
-    "berkeley": [
-        [37.86226, -122.25043],
-        [37.86781, -122.26502],
-    ],
-    "north_berkeley": [
-        [37.86425, -122.26330],
-        [37.87655, -122.28974],
-    ],
-    "pac_heights": [
-        [37.79124, -122.42381],
-        [37.79850, -122.44784],
-    ],
-    "lower_pac_heights": [
-        [37.78554, -122.42878],
-        [37.78873, -122.44544],
-    ],
-    "haight": [
-        [37.77059, -122.42688],
-        [37.77086, -122.45401],
-    ],
-    "sunset": [
-        [37.75451, -122.46422],
-        [37.76258, -122.50825],
-    ],
-    "richmond": [
-        [37.77188, -122.47263],
-        [37.78029, -122.51005],
-    ],
-    "presidio": [
-        [37.77805, -122.43959],
-        [37.78829, -122.47151],
-    ]
 }
 
 # A list of neighborhood names to look for in the Craigslist neighborhood name field. If a listing doesn't fall into
 # one of the boxes you defined, it will be checked to see if the neighborhood name it was listed under matches one
 # of these.  This is less accurate than the boxes, because it relies on the owner to set the right neighborhood,
 # but it also catches listings that don't have coordinates (many listings are missing this info).
-NEIGHBORHOODS = ["berkeley north", "berkeley", "rockridge", "adams point", "oakland lake merritt", "cow hollow", "piedmont", "pac hts", "pacific heights", "lower haight", "inner sunset", "outer sunset", "presidio", "palo alto", "richmond / seacliff", "haight ashbury", "alameda", "twin peaks", "noe valley", "bernal heights", "glen park", "sunset", "mission district", "potrero hill", "dogpatch"]
+NEIGHBORHOODS = ["trinity bellwoods", "trinity", "bellwoods", "annex", "harbourfront"]
 
 ## Transit preferences
 
