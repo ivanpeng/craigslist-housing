@@ -1,0 +1,1 @@
+A python script based off of https://www.dataquest.io/blog/apartment-finding-slackbot/ in an effort to find an apartment in Toronto.
