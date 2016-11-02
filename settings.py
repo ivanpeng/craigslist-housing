@@ -84,7 +84,9 @@ SLACK_TOKEN = os.getenv('SLACK_TOKEN', "")
 
 # Any private settings are imported here.
 try:
-    from private import *
+    import private
+    SLACK_TOKEN = private.SLACK_TOKEN
+    print("Slack token imported from private settings file.")
 except Exception:
     pass
 
