@@ -47,14 +47,8 @@ def scrape_area(area):
                              filters={'max_price': settings.MAX_PRICE, "min_price": settings.MIN_PRICE})
 
     results = []
-    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=20)
-    while True:
-        try:
-            result = next(gen)
-        except StopIteration:
-            break
-        except Exception:
-            continue
+    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=50)
+    for result in gen:
         listing = session.query(Listing).filter_by(cl_id=result["id"]).first()
 
         # Don't store the listing if it already exists.
@@ -75,7 +69,6 @@ def scrape_area(area):
                 result.update(geo_data)
             else:
                 result["area"] = ""
-                result["bart"] = ""
 
             # Try parsing the price.
             price = 0
@@ -101,9 +94,7 @@ def scrape_area(area):
             session.add(listing)
             session.commit()
 
-            # Return the result if it's near a bart station, or if it is in an area we defined.
-            if len(result["area"]) > 0:
-                results.append(result)
+            results.append(result)
 
     return results
 

@@ -67,8 +67,5 @@ def find_points_of_interest(geotag, location):
 
     return {
         "area_found": area_found,
-        "area": area,
-        "near_bart": near_bart,
-        "bart_dist": bart_dist,
-        "bart": bart
+        "area": area
     }
