@@ -31,7 +31,6 @@ class Listing(Base):
     location = Column(String)
     cl_id = Column(Integer, unique=True)
     area = Column(String)
-    bart_stop = Column(String)
 
 Base.metadata.create_all(engine)
 
@@ -95,8 +94,7 @@ def scrape_area(area):
                 price=price,
                 location=result["where"],
                 cl_id=result["id"],
-                area=result["area"],
-                bart_stop=result["bart"]
+                area=result["area"]
             )
 
             # Save the listing so we don't grab it again.
@@ -104,7 +102,7 @@ def scrape_area(area):
             session.commit()
 
             # Return the result if it's near a bart station, or if it is in an area we defined.
-            if len(result["bart"]) > 0 or len(result["area"]) > 0:
+            if len(result["area"]) > 0:
                 results.append(result)
 
     return results
@@ -126,4 +124,9 @@ def do_scrape():
 
     # Post each result to slack.
     for result in all_results:
-        post_listing_to_slack(sc, result)
+        #post_listing_to_slack(sc, result)
+        print(result)
+
+
+if __name__ == "__main__":
+    do_scrape()
