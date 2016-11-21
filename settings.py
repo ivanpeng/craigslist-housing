@@ -6,7 +6,7 @@ import os
 MIN_PRICE = 750
 
 # The maximum rent you want to pay per month.
-MAX_PRICE = 1500
+MAX_PRICE = 1400
 
 ## Location preferences
 
@@ -26,16 +26,16 @@ AREAS = ["tor"]
 # anything in NEIGHBORHOODS.
 BOXES = {
     "trinity_bellwoods": [
-        [-79.435827,43.634757],
-        [-79.40598,43.660513],
+        [-79.435827, 43.634757],
+        [-79.40598, 43.660513],
     ],
     "harbourfront": [
         [-79.405271, 43.636533],
         [-79.366556, 43.648935],
     ],
     "annex-dupont": [
-        [-79.42374,43.664476],
-        [-79.397247,43.683153],
+        [-79.42374, 43.664476],
+        [-79.397247, 43.683153],
     ],
 }
 
@@ -44,21 +44,6 @@ BOXES = {
 # of these.  This is less accurate than the boxes, because it relies on the owner to set the right neighborhood,
 # but it also catches listings that don't have coordinates (many listings are missing this info).
 NEIGHBORHOODS = ["trinity bellwoods", "trinity", "bellwoods", "annex", "harbourfront"]
-
-## Transit preferences
-
-# The farthest you want to live from a transit stop.
-MAX_TRANSIT_DIST = 2 # kilometers
-
-# Transit stations you want to check against.  Every coordinate here will be checked against each listing,
-# and the closest station name will be added to the result and posted into Slack.
-TRANSIT_STATIONS = {
-    "oakland_19th_bart": [37.8118051,-122.2720873],
-    "macarthur_bart": [37.8265657,-122.2686705],
-    "rockridge_bart": [37.841286,-122.2566329],
-    "downtown_berkeley_bart": [37.8629541,-122.276594],
-    "north_berkeley_bart": [37.8713411,-122.2849758]
-}
 
 ## Search type preferences
 

@@ -13,6 +13,7 @@ engine = create_engine('sqlite:///listings.db', echo=False)
 
 Base = declarative_base()
 
+
 class Listing(Base):
     """
     A table to store data on craigslist listings.
@@ -36,6 +37,7 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
+
 
 def scrape_area(area):
     """
@@ -98,6 +100,7 @@ def scrape_area(area):
 
     return results
 
+
 def do_scrape():
     """
     Runs the craigslist scraper, and posts data to slack.
@@ -115,8 +118,8 @@ def do_scrape():
 
     # Post each result to slack.
     for result in all_results:
-        #post_listing_to_slack(sc, result)
-        print(result)
+        post_listing_to_slack(sc, result)
+        #print(result)
 
 
 if __name__ == "__main__":
