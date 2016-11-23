@@ -39,13 +39,46 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-def scrape_area(area):
+def parse_result(result):
+    lat = 0
+    lon = 0
+    if result["geotag"] is not None:
+        # Assign the coordinates.
+        lat = result["geotag"][0]
+        lon = result["geotag"][1]
+
+        # Annotate the result with information about the area it's in and points of interest near it.
+        geo_data = find_points_of_interest(result["geotag"], result["where"])
+        result.update(geo_data)
+    else:
+        result["area"] = ""
+
+    # Try parsing the price.
+    price = 0
+    try:
+        price = float(result["price"].replace("$", ""))
+    except Exception:
+        pass
+    return Listing(
+                link=result["url"],
+                created=parse(result["datetime"]),
+                lat=lat,
+                lon=lon,
+                name=result["name"],
+                price=price,
+                location=result["where"],
+                cl_id=result["id"],
+                area=result["area"]
+            )
+
+
+def scrape_area(area, category):
     """
     Scrapes craigslist for a certain geographic area, and finds the latest listings.
     :param area:
     :return: A list of results.
     """
-    cl_h = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area=area, category=settings.CRAIGSLIST_HOUSING_SECTION,
+    cl_h = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area=area, category=category,
                              filters={'max_price': settings.MAX_PRICE, "min_price": settings.MIN_PRICE})
 
     results = []
@@ -58,40 +91,7 @@ def scrape_area(area):
             if result["where"] is None:
                 # If there is no string identifying which neighborhood the result is from, skip it.
                 continue
-
-            lat = 0
-            lon = 0
-            if result["geotag"] is not None:
-                # Assign the coordinates.
-                lat = result["geotag"][0]
-                lon = result["geotag"][1]
-
-                # Annotate the result with information about the area it's in and points of interest near it.
-                geo_data = find_points_of_interest(result["geotag"], result["where"])
-                result.update(geo_data)
-            else:
-                result["area"] = ""
-
-            # Try parsing the price.
-            price = 0
-            try:
-                price = float(result["price"].replace("$", ""))
-            except Exception:
-                pass
-
-            # Create the listing object.
-            listing = Listing(
-                link=result["url"],
-                created=parse(result["datetime"]),
-                lat=lat,
-                lon=lon,
-                name=result["name"],
-                price=price,
-                location=result["where"],
-                cl_id=result["id"],
-                area=result["area"]
-            )
-
+            listing = parse_result(result)
             # Save the listing so we don't grab it again.
             session.add(listing)
             session.commit()
@@ -112,7 +112,8 @@ def do_scrape():
     # Get all the results from craigslist.
     all_results = []
     for area in settings.AREAS:
-        all_results += scrape_area(area)
+        for category in settings.CATEGORIES:
+            all_results += scrape_area(area, category)
 
     print("{}: Got {} results".format(time.ctime(), len(all_results)))
 

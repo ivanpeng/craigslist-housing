@@ -3,10 +3,10 @@ import os
 ## Price
 
 # The minimum rent you want to pay per month.
-MIN_PRICE = 750
+MIN_PRICE = 500
 
 # The maximum rent you want to pay per month.
-MAX_PRICE = 1400
+MAX_PRICE = 1500
 
 ## Location preferences
 
@@ -51,7 +51,8 @@ NEIGHBORHOODS = ["trinity bellwoods", "trinity", "bellwoods", "annex", "harbourf
 # For instance, https://sfbay.craigslist.org/search/apa find apartments for rent.
 # https://sfbay.craigslist.org/search/sub finds sublets.
 # You only need the last 3 letters of the URLs.
-CRAIGSLIST_HOUSING_SECTION = 'apa'
+#CRAIGSLIST_HOUSING_SECTION = 'apa'
+CATEGORIES = ["apa", "roo"]
 
 ## System settings
 
@@ -61,7 +62,7 @@ CRAIGSLIST_HOUSING_SECTION = 'apa'
 SLEEP_INTERVAL = 20 * 60 # 20 minutes
 
 # Which slack channel to post the listings into.
-SLACK_CHANNEL = "#housing"
+SLACK_CHANNEL = "#random"
 
 # The token that allows us to connect to slack.
 # Should be put in private.py, or set as an environment variable.
