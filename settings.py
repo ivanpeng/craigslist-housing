@@ -62,7 +62,7 @@ CATEGORIES = ["apa", "roo"]
 SLEEP_INTERVAL = 20 * 60 # 20 minutes
 
 # Which slack channel to post the listings into.
-SLACK_CHANNEL = "#random"
+SLACK_CHANNEL = "#housing"
 
 # The token that allows us to connect to slack.
 # Should be put in private.py, or set as an environment variable.
