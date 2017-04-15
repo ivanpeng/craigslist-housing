@@ -1,6 +1,7 @@
 import settings
 import math
 
+
 def coord_distance(lat1, lon1, lat2, lon2):
     """
     Finds the distance between two pairs of latitude and longitude.
@@ -18,6 +19,7 @@ def coord_distance(lat1, lon1, lat2, lon2):
     km = 6367 * c
     return km
 
+
 def in_box(coords, box):
     """
     Find if a coordinate tuple is inside a bounding box.
@@ -28,6 +30,7 @@ def in_box(coords, box):
     if box[0][0] < coords[0] < box[1][0] and box[1][1] < coords[1] < box[0][1]:
         return True
     return False
+
 
 def post_listing_to_slack(sc, listing):
     """
@@ -40,6 +43,7 @@ def post_listing_to_slack(sc, listing):
         "chat.postMessage", channel=settings.SLACK_CHANNEL, text=desc,
         username='pybot', icon_emoji=':robot_face:'
     )
+
 
 def find_points_of_interest(geotag, location):
     """

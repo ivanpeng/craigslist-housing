@@ -3,6 +3,7 @@ import settings
 import time
 import sys
 import traceback
+import random
 
 if __name__ == "__main__":
     while True:

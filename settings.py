@@ -6,7 +6,7 @@ import os
 MIN_PRICE = 500
 
 # The maximum rent you want to pay per month.
-MAX_PRICE = 1500
+MAX_PRICE = 1400
 
 ## Location preferences
 
@@ -25,25 +25,21 @@ AREAS = ["tor"]
 # name.  If no match, the neighborhood field, which is a string, will be checked to see if it matches
 # anything in NEIGHBORHOODS.
 BOXES = {
-    "trinity_bellwoods": [
-        [-79.435827, 43.634757],
-        [-79.40598, 43.660513],
+    "westend": [
+        [-79.4442,43.64727],
+        [-79.397763,43.661601]
     ],
-    "harbourfront": [
-        [-79.405271, 43.636533],
-        [-79.366556, 43.648935],
-    ],
-    "annex-dupont": [
-        [-79.42374, 43.664476],
-        [-79.397247, 43.683153],
-    ],
+    "annex":[
+        [-79.412227,43.661973],
+        [-79.39815,43.668896]
+    ]
 }
 
 # A list of neighborhood names to look for in the Craigslist neighborhood name field. If a listing doesn't fall into
 # one of the boxes you defined, it will be checked to see if the neighborhood name it was listed under matches one
 # of these.  This is less accurate than the boxes, because it relies on the owner to set the right neighborhood,
 # but it also catches listings that don't have coordinates (many listings are missing this info).
-NEIGHBORHOODS = ["trinity bellwoods", "trinity", "bellwoods", "annex", "harbourfront"]
+NEIGHBORHOODS = ["trinity bellwoods", "trinity", "bellwoods", "annex", "little portugal"]
 
 ## Search type preferences
 
