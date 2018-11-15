@@ -1,1 +1,5 @@
 private.py
+.idea/
+*.pyc
+*.db
+__pycache__/
