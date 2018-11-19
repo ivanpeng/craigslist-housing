@@ -1,4 +1,4 @@
-FROM python:3.5-alpine
+FROM python:3.6-alpine
 MAINTAINER ivanpeng13@gmail.com
 
 # Install python components to this docker instance
