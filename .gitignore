@@ -3,3 +3,4 @@ private.py
 *.pyc
 *.db
 __pycache__/
+slacktest.py
