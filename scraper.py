@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
 from sqlalchemy.orm import sessionmaker
 from dateutil.parser import parse
-from util import post_listing_to_slack, find_points_of_interest
+from util import post_listing_to_slack, in_boxes
 from slackclient import SlackClient
 import time
 import settings
@@ -42,14 +42,11 @@ session = Session()
 def parse_result(result):
     lat = 0
     lon = 0
-    if result["geotag"] is not None:
+    if 'geotag' in result:
         # Assign the coordinates.
-        lat = result["geotag"][0]
-        lon = result["geotag"][1]
-
-        # Annotate the result with information about the area it's in and points of interest near it.
-        geo_data = find_points_of_interest(result["geotag"], result["where"])
-        result.update(geo_data)
+        # NOTE THAT IT IS REVERSED
+        lat = result["geotag"][1]
+        lon = result["geotag"][0]
     else:
         result["area"] = ""
 
@@ -87,9 +84,9 @@ def scrape_area(area, category):
         listing = session.query(Listing).filter_by(cl_id=result["id"]).first()
 
         # Don't store the listing if it already exists.
-        if listing is None:
-            if result["where"] is None:
-                # If there is no string identifying which neighborhood the result is from, skip it.
+        if listing is None and "where" in result and "geotag" in result:
+            if result["where"] is None or not in_boxes(list(reversed(result['geotag'])), settings.BOXES):
+                # If there is nothing identifying which neighborhood the result is from or geotag is not in boxes, skip
                 continue
             listing = parse_result(result)
             # Save the listing so we don't grab it again.
@@ -117,11 +114,13 @@ def do_scrape():
 
     print("{}: Got {} results".format(time.ctime(), len(all_results)))
 
-    # Post each result to slack.
     for result in all_results:
-        if settings.SLACK_TOKEN != "":
-            post_listing_to_slack(sc, result)
         print(result)
+    # # Post each result to slack.
+    # for result in all_results:
+    #     if settings.SLACK_TOKEN != "":
+    #         post_listing_to_slack(sc, result)
+    #     print(result)
 
 
 if __name__ == "__main__":

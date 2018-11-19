@@ -68,9 +68,3 @@ try:
     print("Slack token imported from private settings file.")
 except Exception:
     pass
-
-# Any external private settings are imported from here.
-try:
-    from config.private import *
-except Exception:
-    pass
