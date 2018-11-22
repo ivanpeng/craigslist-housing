@@ -10,7 +10,7 @@ before_install:
 install:
   - pip install -r requirements.txt
 script:
-  - coverage run --source src -m unittest
+  - coverage run -m unittest
 after_success:
   - coveralls
   # Build to docker image, and push it
