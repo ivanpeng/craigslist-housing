@@ -15,5 +15,5 @@ after_success:
   - coveralls
   # Build to docker image, and push it
   - docker build -t craigslist-housing .
-  - docker tag craigslist-housing:lastest pengivan/craigslist-housing
+  - docker tag craigslist-housing:latest pengivan/craigslist-housing
   - docker push pengivan/craigslist-housing
