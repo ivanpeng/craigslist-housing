@@ -115,12 +115,9 @@ def do_scrape():
     print("{}: Got {} results".format(time.ctime(), len(all_results)))
 
     for result in all_results:
+        if settings.SLACK_TOKEN != "":
+            post_listing_to_slack(sc, result)
         print(result)
-    # # Post each result to slack.
-    # for result in all_results:
-    #     if settings.SLACK_TOKEN != "":
-    #         post_listing_to_slack(sc, result)
-    #     print(result)
 
 
 if __name__ == "__main__":
