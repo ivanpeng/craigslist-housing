@@ -79,7 +79,7 @@ def scrape_area(area, category):
                              filters={'max_price': settings.MAX_PRICE, "min_price": settings.MIN_PRICE})
 
     results = []
-    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=20)
+    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=50)
     for result in gen:
         listing = session.query(Listing).filter_by(cl_id=result["id"]).first()
 
