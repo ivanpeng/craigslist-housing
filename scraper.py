@@ -79,12 +79,13 @@ def scrape_area(area, category):
                              filters={'max_price': settings.MAX_PRICE, "min_price": settings.MIN_PRICE})
 
     results = []
-    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=50)
+    gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=20)
     for result in gen:
         listing = session.query(Listing).filter_by(cl_id=result["id"]).first()
 
         # Don't store the listing if it already exists.
-        if listing is None and "where" in result and "geotag" in result:
+        if listing is None and "where" in result and "geotag" in result and result["geotag"] is not None:
+            print(result)
             if result["where"] is None or not in_boxes(list(reversed(result['geotag'])), settings.BOXES):
                 # If there is nothing identifying which neighborhood the result is from or geotag is not in boxes, skip
                 continue
