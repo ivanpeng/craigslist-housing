@@ -3,7 +3,7 @@ import os
 ## Price
 
 # The minimum rent you want to pay per month.
-MIN_PRICE = 700
+MIN_PRICE = 800
 
 # The maximum rent you want to pay per month.
 MAX_PRICE = 3000
@@ -25,18 +25,15 @@ AREAS = ["sfc"]
 # name.  If no match, the neighborhood field, which is a string, will be checked to see if it matches
 # anything in NEIGHBORHOODS.
 BOXES = {
-    "marina/japantown": [[-122.451446,37.780368], [-122.424997,37.805803]],
-    "castro/mission/potrero": [[-122.442661,37.744455], [-122.387187,37.771618]],
-    "bernal heights": [[-122.437527,37.73402], [-122.40599,37.748923]],
-    "haight-ashbury": [[-122.453992,37.759342], [-122.420175,37.779538]],
-    "richmond": [[-122.493232,37.772295], [-122.446166,37.788229]]
+    "mission-bernal-soma-mbay-dogpatch-potrero": [[-122.435441,37.747317], [-122.375024,37.783347]],
+    "nobhill-russianhill": [[-122.42385,37.793291], [-122.399395,37.809851]]
 }
 
 # A list of neighborhood names to look for in the Craigslist neighborhood name field. If a listing doesn't fall into
 # one of the boxes you defined, it will be checked to see if the neighborhood name it was listed under matches one
 # of these.  This is less accurate than the boxes, because it relies on the owner to set the right neighborhood,
 # but it also catches listings that don't have coordinates (many listings are missing this info).
-NEIGHBORHOODS = ["marina", "castro", "mission district", "mission", "ashbury", "potrero", "dogpatch", "bernal heights", "richmond"]
+NEIGHBORHOODS = ["marina", "castro", "mission district", "mission", "potrero", "dogpatch", "bernal heights", "nob hill", "hayes valley", "hayes"]
 
 
 ## Search type preferences
